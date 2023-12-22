@@ -72,12 +72,32 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
   
   <script>
-	  $(function(){
-	  $('p').click(function(){
-		$(this).toggleClass('done');
-	  });
-	});
-  
+    $(function(){
+      // Sprawdzenie, czy localStorage już istnieje
+      var savedDoneSteps = localStorage.getItem('doneSteps');
+      if (savedDoneSteps) {
+        // Jeżeli istnieje, przywróć zapisane kroki
+        $('.container li').each(function(index) {
+          if (savedDoneSteps.charAt(index) === '1') {
+            $(this).find('p').addClass('done');
+          }
+        });
+      }
+
+      $('p').click(function(){
+        $(this).toggleClass('done');
+        // Aktualizacja localStorage po kliknięciu
+        updateLocalStorage();
+      });
+
+      function updateLocalStorage() {
+        var doneSteps = '';
+        $('ul li').each(function() {
+          doneSteps += $(this).find('p').hasClass('done') ? '1' : '0';
+        });
+        localStorage.setItem('doneSteps', doneSteps);
+      }
+    });
   </script>
 
 </body>
