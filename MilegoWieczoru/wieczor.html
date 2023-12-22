@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Sticky Notes Basic Layout</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Reenie+Beanie|Lato:700'>
+	<link rel="stylesheet" href="./wieczor/style.css">
+
+</head>
+<body>
+<div id='container'>
+<h1>Plan dzisiejszego wieczoru dla Bubu</h1>
+<ul>
+  <li>
+    <a href="#" >
+      <h2>Krok #0</h2>
+      <p>Jechać bezpiecznie i zjeść coś pysznego</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #1</h2>
+      <p>Włączyć wygaszacz ekranu</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #2</h2>
+      <p>Włączyć Discord</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #3</h2>
+      <p>Wejść na kanał i zawołać Bartusia</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #4</h2>
+      <p>Wybrać grę przy pomocy kółka</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #5</h2>
+      <p>Uśmiechnąć się i wysłać zdjęcie na dowód</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #6</h2>
+      <p>Spędzić cudowny wieczór</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #7</h2>
+      <p>Położyć się na chmurce</p>
+    </a>
+  </li>
+  <li>
+    <a href="#" >
+      <h2>Krok #8</h2>
+      <p>Przytulić i zasnąć</p>
+    </a>
+  </li>
+</ul>
+
+</div >
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+  
+  <script>
+	  $(function(){
+	  $('p').click(function(){
+		$(this).toggleClass('done');
+	  });
+	});
+  
+  </script>
+
+</body>
+</html>
