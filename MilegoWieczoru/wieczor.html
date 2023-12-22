@@ -71,19 +71,24 @@
 </div >
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
   
-  <script>
-    $(document).ready(function() {
+<script>
+    window.onload = function() {
       setDone();
 
-      $('p').click(function(){
-        $(this).toggleClass('done');
-        updateLocalStorage();
+      var paragraphs = document.querySelectorAll('p');
+      paragraphs.forEach(function(paragraph) {
+        paragraph.addEventListener('click', function() {
+          this.classList.toggle('done');
+          updateLocalStorage();
+        });
       });
 
       function updateLocalStorage() {
         var doneSteps = '';
-        $('ul li').each(function() {
-          doneSteps += $(this).find('p').hasClass('done') ? '1' : '0';
+        var listItems = document.querySelectorAll('ul li');
+        listItems.forEach(function(listItem) {
+          var paragraph = listItem.querySelector('p');
+          doneSteps += paragraph.classList.contains('done') ? '1' : '0';
         });
         localStorage.setItem('doneSteps', doneSteps);
       }
@@ -91,14 +96,16 @@
       function setDone() {
         var savedDoneSteps = localStorage.getItem('doneSteps');
         if (savedDoneSteps) {
-          $('.container li').each(function(index) {
+          var listItems = document.querySelectorAll('.container li');
+          listItems.forEach(function(listItem, index) {
+            var paragraph = listItem.querySelector('p');
             if (savedDoneSteps.charAt(index) === '1') {
-              $(this).find('p').addClass('done');
+              paragraph.classList.add('done');
             }
           });
         }
       }
-    });
+    };
   </script>
 
 </body>
