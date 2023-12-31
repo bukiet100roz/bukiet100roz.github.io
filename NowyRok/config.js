@@ -23,5 +23,5 @@ var config = {
     },
 
 
-    loveText: 'Uwielbiam Cię'
+    loveText: 'Jestem moim idealem!'
 };
