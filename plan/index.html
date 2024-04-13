@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+		background-image: url('img/cs_menu.jpg');
+		background-size: cover;        
+        font-family: Verdana, Geneva, sans-serif; /* Dodanie fontu Verdana */
+
+    }
+
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+		background-color: rgba(0, 0, 0, 0.5); /* Przyciemnione tło */
+		backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+        text-align: center;
+        background-color: #434842;
+        padding: 20px;
+    }
+
+    .button {
+        border: none;
+		background: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 5px;
+        transition: background-color 0.3s, color 0.3s;
+		font-family: Verdana, Geneva, sans-serif; /* Dodanie fontu Verdana */
+		font-size: 16px;
+		float:right;
+		padding: 15px;
+
+    }
+
+    .button.accept {
+        background-color: #46e147;
+        color: white;
+    }
+
+    .button.cancel {
+
+        color: white;
+    }
+
+    .button:hover {
+        opacity: 0.8;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="modal">
+    <div class="modal-content">
+        <img src="img/cs.webp" alt="Logo" width="400">
+		<br>
+		<button class="button cancel" onclick="window.location.href='other.html'">ZAMKNIJ</button>
+        <button class="button accept" onclick="window.location.href='accept.html'">AKCEPTUJ</button>
+        
+    </div>
+</div>
+
+</body>
+</html>
