@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Losowe Dźwięki i Animacja</title>
+    <style>
+        #animated-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: top 2s ease, left 2s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="animated-element">Losowe Odtwarzanie Dźwięku</h1>
+    <audio id="sound"></audio>
+    <p>Dźwięk zostanie odtworzony losowo w ciągu 1-2 godzin.</p>
+    <button onclick="test()">Testuj dźwięk</button>
+    
+    <script>
+        const sounds = [
+            "yoda.mp3",
+            "skubidu.mp3",
+            "peekaboo.mp3"
+        ];
+
+        function getRandomSound() {
+            const randomIndex = Math.floor(Math.random() * sounds.length);
+            return sounds[randomIndex];
+        }
+
+        function playSound() {
+            const sound = document.getElementById('sound');
+            sound.src = getRandomSound();
+            sound.play();
+        }
+
+        function scheduleSound() {
+            const oneHour = 3600000; // 1 hour in milliseconds
+            const twoHours = 7200000; // 2 hours in milliseconds
+            const interval = getRandomInterval(oneHour, twoHours);
+			console.log(interval / (1000 * 60));
+
+            setTimeout(function() {
+                playSound();
+                scheduleSound(); // schedule the next sound
+            }, interval);
+        }
+
+        function getRandomInterval(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function getRandomPosition() {
+            const x = Math.floor(Math.random() * 100);
+            const y = Math.floor(Math.random() * 100);
+            return { x, y };
+        }
+
+        function animateElement() {
+            const element = document.getElementById('animated-element');
+            const { x, y } = getRandomPosition();
+            element.style.top = y + '%';
+            element.style.left = x + '%';
+
+            setTimeout(animateElement, 2000); // Move element every 2 seconds
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            scheduleSound();
+            animateElement();
+        });
+
+        function test() {
+            const sound = document.getElementById('sound');
+            sound.src = getRandomSound();
+            sound.play();
+        }
+    </script>
+</body>
+</html>
