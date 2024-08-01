@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smacznego!</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .rymy {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black;
+        }
+
+        .main-image {
+            max-width: 80%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+			background: rgba(255, 250, 230, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background"></div>
+    <div class="content">
+        <div class="rymy" id="rymy"></div>
+        <img src="smacznego.png" alt="Smacznego!" class="main-image">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rymyElement = document.getElementById('rymy');
+            const backgroundElement = document.getElementById('background');
+
+            const rymy = {
+                'poniedziałek': {
+                    'śniadanie': 'Zjedz pyszne śniadanie na dobry początek tygodnia kochanie!',
+                    'drugie śniadanie': 'Drugie śniadanko. Smacznego, niech będzie wyśmienicie. Kocham cię nad życie!',
+                    'obiadokolacja': 'Obiadokolacja w poniedziałek, by zacząć tydzień z siłą!'
+                },
+                'wtorek': {
+                    'śniadanie': 'Śniadanko wtorkowe by były w pracy działania bojowe!',
+                    'drugie śniadanie': 'Drugie śniadanie we wtorek, na pokonanie trudu!',
+                    'obiadokolacja': 'Czas byś obiad zszamała, bo pewnie głodna moja myszka mała!'
+                },
+                'środa': {
+                    'śniadanie': 'Dnia początek to śniadanie, pysznego Ci życzę moje kochanie!',
+                    'drugie śniadanie': 'W pracy też życzę smacznego, dla mego kwiatuszka kochanego',
+                    'obiadokolacja': 'Czas na obiadek, a na deser może loda, bo dziś kochanie środa 🤤'
+                },
+                'czwartek': {
+                    'śniadanie': 'Czwartkowe śniadanie, by dzień zacząć z przytupem!',
+                    'drugie śniadanie': 'Drugie śniadanie w czwartek, niech doda Ci skrzydeł!',
+                    'obiadokolacja': 'Czwarty dzień tygodnia, obiad gorący jak pochodnia! I ty seksiaku 🥵'
+                },
+                'piątek': {
+                    'śniadanie': 'Dzień dobry słodziaku. Piąteczek piątunio, czas na śniadaniunio!',
+                    'drugie śniadanie': 'Luźny piąteczek to i lepiej smakuje śniadanko! Smacznego kocico! 😍',
+                    'obiadokolacja': 'Ostatni obiadzik przed weekendem, zjedz bo wściekły bendem!'
+                },
+                'sobota': {
+                    'śniadanie': 'Sobotnie śniadanie, na leniwe poranki!',
+                    'obiad': 'Obiadek w sobotę, jebać robote! Smacznego kwiatuszku, zjedz sobie dziś w łóżku 🛏️',
+                    'kolacja': 'Niech kolacja zagości w tym dniu pełnym radości! 😋'
+                },
+                'niedziela': {
+                    'śniadanie': 'Niedzielne śniadanie, o ile nie zaśpisz na to danie!',
+                    'obiad': 'Niedzielny obiadek, jak u mamusi! Bubuś niech się ze śmiechu dusi. hihihihi',
+                    'kolacja': 'Kolacja w niedzielę, zrób ją wspólnie z Bartusiem skurwielem 😈'
+                }
+            };
+
+            const backgrounds = {
+                'śniadanie': 'sniadanie.jpg',
+                'drugie śniadanie': '2sniadanie.jpg',
+                'obiadokolacja': 'obiadokolacja.jpg',
+                'obiad': 'obiad.jpeg',
+                'kolacja': 'kolacja.jpg'
+            };
+
+            const dayNames = ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'];
+            const now = new Date();
+            const day = dayNames[now.getDay()];
+			const hour = now.getHours();
+
+            let mealType = '';
+            if (day === 'sobota' || day === 'niedziela') {
+                if (hour >= 7 && hour < 12) mealType = 'śniadanie';
+                else if (hour >= 13 && hour < 17) mealType = 'obiad';
+                else if (hour >= 18 && hour < 23) mealType = 'kolacja';
+            } else {
+                if (hour >= 7 && hour < 11) mealType = 'śniadanie';
+                else if (hour >= 11 && hour < 15) mealType = 'drugie śniadanie';
+                else if (hour >= 16 && hour < 20) mealType = 'obiadokolacja';
+            }
+
+            const rym = rymy[day][mealType] || 'Może przekąska?';
+            rymyElement.textContent = rym;
+
+            const bgImage = backgrounds[mealType] || 'default.jpeg';
+            backgroundElement.style.backgroundImage = `url(${bgImage})`;
+        });
+    </script>
+</body>
+</html>
