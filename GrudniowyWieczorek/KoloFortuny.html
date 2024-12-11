@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koło Fortuny</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 10px solid #444;
+            position: relative;
+            overflow: hidden;
+            transform: rotate(0deg);
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+        .segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+            transform-origin: 50% 50%;
+        }
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 20px;
+            height: 60px;
+            background-color: #ff4d4d;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            z-index: 10;
+        }
+        .spin-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .spin-button:disabled {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="wheel-container">
+        <div class="pointer"></div>
+        <div id="wheel" class="wheel"></div>
+    </div>
+    <button id="spinButton" class="spin-button">Zakręć</button>
+
+    <script>
+        const options = ["Luma Island", "CS 2", "Fortnite", "Coś innego"];
+        const wheel = document.getElementById('wheel');
+        const spinButton = document.getElementById('spinButton');
+        let isSpinning = false;
+
+        function createWheel() {
+            const segmentAngle = 360 / options.length;
+            options.forEach((option, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'segment';
+                segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+                segment.style.backgroundColor = `hsl(${index * (360 / options.length)}, 70%, 50%)`;
+                const text = document.createElement('div');
+                text.style.position = 'absolute';
+                text.style.top = '45%';
+                text.style.left = '75%';
+                text.style.color = 'white';
+                text.style.fontSize = '14px';
+                text.style.fontWeight = 'bold';
+                text.innerText = option;
+                segment.appendChild(text);
+                wheel.appendChild(segment);
+            });
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+            const randomSpin = Math.floor(Math.random() * 360) + 360 * 5;
+            const endAngle = randomSpin % 360;
+            wheel.style.transform = `rotate(${randomSpin}deg)`;
+
+            setTimeout(() => {
+                const segmentAngle = 360 / options.length;
+                const selectedIndex = Math.floor((360 - endAngle) / segmentAngle) % options.length;
+                alert(`Wylosowano: ${options[selectedIndex]}`);
+                isSpinning = false;
+				wheel.style.transform = ``;
+
+            }, 4000);
+        }
+
+        spinButton.addEventListener('click', spinWheel);
+        createWheel();
+    </script>
+</body>
+</html>

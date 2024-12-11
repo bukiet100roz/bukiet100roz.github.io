@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Zadań</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f0;
+            color: #d14784;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .task-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff85b2;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f2f2;
+            position: relative;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        .heart-checkbox {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d14784" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1 7.8 7.8 7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>') no-repeat center/contain;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .heart-checkbox:checked {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff85b2" stroke="%23d14784" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1 7.8 7.8 7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"></path></svg>') no-repeat center/contain;
+            transform: scale(1.2);
+        }
+
+        .heart-checkbox:checked + span {
+            text-decoration: line-through;
+            color: #aaa;
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        span {
+            flex-grow: 1;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-container">
+        <h1>Plan Bubu na dzisiejszy wieczór</h1>
+        <ul id="taskList">
+            <li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Zjeść coś dobrego</span>
+            </li>
+            <li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Opowiedzieć Bartusiowi o Celince, pracy i snach z rana</span>
+            </li>
+            <li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Może chwilkę poleżeć jak będę zmęczona</span>
+            </li>
+			
+			<li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Pograć chociaż godzinkę z Bartusiem, grę wybierze <a href='KoloFortuny.html'>koło fortuny</a> </span>
+            </li>
+			<li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Wziąć cieplutki prysznic, a jak będzie zimko to poprosić o rozgrzanie 😈</span>
+            </li>
+			<li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Wzajemnie rozgrzać Bartusia</span>
+            </li>
+			<li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Rozłożyć laptopka i obejrzeć film lub coś z YT, zależy na co mam ochotę</span>
+            </li>
+			<li>
+                <input type="checkbox" class="heart-checkbox">
+                <span>Iść lulu słuchając bajki o pieskach, albo o czymś innym co wymyślę</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+    <script>
+        const taskList = document.getElementById('taskList');
+
+        function saveTasks() {
+            const tasks = [];
+            taskList.querySelectorAll('li').forEach(li => {
+                tasks.push({
+                    text: li.querySelector('span').innerText,
+                    completed: li.querySelector('.heart-checkbox').checked
+                });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            taskList.innerHTML = '';
+            savedTasks.forEach(task => {
+                const li = document.createElement('li');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'heart-checkbox';
+                checkbox.checked = task.completed;
+
+                const span = document.createElement('span');
+                span.innerText = task.text;
+
+                if (task.completed) {
+                    li.classList.add('completed');
+                }
+
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        li.classList.add('completed');
+                    } else {
+                        li.classList.remove('completed');
+                    }
+                    saveTasks();
+                });
+
+                li.appendChild(checkbox);
+                li.appendChild(span);
+                taskList.appendChild(li);
+            });
+        }
+
+        document.querySelectorAll('.heart-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const task = this.nextElementSibling;
+                if (this.checked) {
+                    task.parentElement.classList.add('completed');
+                } else {
+                    task.parentElement.classList.remove('completed');
+                }
+                saveTasks();
+            });
+        });
+
+        loadTasks();
+    </script>
+    </script>
+</body>
+</html>
