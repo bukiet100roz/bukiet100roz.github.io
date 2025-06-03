@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Wybierz Grę</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0faff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+    .games {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+      width: 100%;
+    }
+    button {
+      padding: 12px;
+      background: #5aa9e6;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2f8bd2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Co gramy dzisiaj? 🎲</h1>
+  <div class="games">
+    <button onclick="alert('Cel? Pal! 🎮')">CS2</button>
+    <button onclick="alert('Czas na duszki! 👻🔥')">Phasmophobia</button>
+    <button onclick="alert('To może coś nowego?')">Coś innego</button>
+  </div>
+</body>
+</html>

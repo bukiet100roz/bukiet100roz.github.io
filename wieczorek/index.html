@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan Wieczoru</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fef6f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #ff8fab;
+      color: white;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #ff5e8e;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <h1 id="question">Czy moje kochanie ma ochotę na granie?</h1>
+    <div class="btn-group" id="buttons">
+      <button onclick="answerGranie(true)">TAK</button>
+      <button onclick="answerGranie(false)">NIE</button>
+    </div>
+  </div>
+
+  <script>
+    const question = document.getElementById("question");
+    const buttons = document.getElementById("buttons");
+
+    function answerGranie(wantsToPlay) {
+      if (wantsToPlay) {
+        window.location.href = "gry.html";
+      } else {
+        question.textContent = "A może relaksik w łóżku i oglądanie?";
+        buttons.innerHTML = `
+          <button onclick="answerRelaks(true)">TAK</button>
+          <button onclick="answerRelaks(false)">NIE</button>
+        `;
+      }
+    }
+
+    function answerRelaks(wantsToRelax) {
+      if (wantsToRelax) {
+        window.location.href = "relaks.html";
+      } else {
+        question.textContent = "A na co Bubuś ma ochotę?";
+        buttons.innerHTML = `
+          <button onclick="customChoice('slodkie')">🍰 Może zrób sobie coś słodkiego i herbatkę?</button>
+          <button onclick="customChoice('kapiel')">🛁 Gorąca kąpiel?</button>
+          <button onclick="customChoice('przytulaski')">🤗 Szybka drzemka?</button>
+        `;
+      }
+    }
+
+    function customChoice(choice) {
+      switch (choice) {
+        case 'slodkie':
+          alert("Słodkości...Takie jak Ty 🍩🍓");
+          break;
+        case 'kapiel':
+          alert("Prysznic i piana czekają na Afrodytę 🛁💖");
+          break;
+        case 'przytulaski':
+          alert("Dobranoc skarbeńku! 🤗💬");
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
