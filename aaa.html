@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title></title>
+  <style>
+
+div {
+	border: 1px solid transparent;
+}
+#clock-rim {
+  display: block;
+  position: relative;
+	margin-left: 40%;
+	margin-top: 5%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(to right, rgba(255,0,132,1) 0%, rgba(255,0,132,1) 100%);
+  border-radius: 150px;
+	box-shadow: 20px 2px 20px 2px grey;
+	
+}
+#clock-face {
+  display: block;
+  position: relative;  
+  width: 260px;
+  height: 260px;
+  margin: 19px auto;
+  border-radius: 150px;
+	background: mistyrose;
+}
+#second {
+	position: absolute;
+	top: 123px;
+	left: 128px;
+	width: 100px;
+	height: 2px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	transform: unset;
+	background: linear-gradient(to right, rgba(255,0,132,1) 0%, rgba(255,0,132,1) 100%);
+	transform-origin: 1px 1px; }
+#minute {
+	position: absolute;
+	top: 123px;
+	left: 128px;
+	width: 100px;
+	height: 4px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	transform: unset;
+	background: linear-gradient(to right, rgba(255,0,132,1) 0%, rgba(255,0,132,1) 100%);
+	transform-origin: 2px 2px; }
+#hour {
+	position: absolute;
+	top: 123px;
+	left: 128px;
+	width: 50px;
+	height: 4px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	transform: unset;
+	background: linear-gradient(to right, rgba(255,0,132,1) 0%, rgba(255,0,132,1) 100%);
+	transform-origin: 2px 2px; }
+#center {
+	position: absolute;
+	top: 118px;
+	left: 120px;
+	width: 16px;
+	height: 16px;
+	background: purple;
+	border: 1px solid gray;
+	border-radius: 16px;
+}
+#notch-container {
+	width: 260px;
+	height: 260px;
+	margin: 25px;
+	
+}
+.notch {
+	position: absolute;
+	width: 10px;
+	height: 2px;
+	background: black;
+	border-radius: 5px 5px 5px 5px;
+}
+.thin {
+	position: absolute;
+	width: 10px;
+	height: 1px;
+	border-top: 1px solid gray;
+}
+body{
+  background: mistyrose;
+	font-family: 'Great Vibes', cursive;
+	
+}
+h2{
+text-align:center;
+}
+.button{
+	top:100px;
+	width: 50px;
+	height: 50px;
+	position:relative;
+	margin: 0 auto;
+	border-radius: 5px;
+	background: none;
+	cursor: pointer;
+	transition: background 0.5s ease;
+}
+.button:hover{
+
+}
+.active#heart:before,.active#heart:after{
+	background: red !important;
+}
+#heart {
+    width: 100px;
+    height: 90px;
+    transition: background 0.5s ease;
+}
+#heart:before,
+#heart:after {
+	transition: background 0.5s ease;
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: rgba(255, 0, 132, 1);
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+#heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+}
+  .heart-btn {
+    margin: 0 auto;
+	top:50px;
+    width: 120px;
+    height: 120px;
+    background: #ff4d6d;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    outline: none;
+    transform: rotate(-45deg);
+  }
+
+  .heart-btn::before,
+  .heart-btn::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #ff4d6d;
+    border-radius: 50%;
+	z-index: -1;
+  }
+  .heart-btn::before {
+    top: -60px;
+    left: 0;
+  }
+  .heart-btn::after {
+    left: 60px;
+    top: 0;
+  }
+
+  .heart-btn span {
+    transform: rotate(45deg);
+    pointer-events: none;
+  }
+  
+  #wynik{
+  text-align: center;}
+</style>
+</head>
+<body>
+<div class="heart-btn" id="losujBtn">
+  <span>LOSUJ</span>
+</div>
+<div id="wynik" style="color:deeppink;font-size:2rem;margin-top:90px;">
+  Kliknij serduszko ❤️
+</div>
+
+
+<script>
+  const btn = document.getElementById("losujBtn");
+  const wynik = document.getElementById("wynik");
+
+  const teksty = [
+    "Masz najpiękniejsze oczka na świecie 💖",
+    "Kocham Cię najmocniej na świecie ❤️",
+    "Wyglądasz dziś prześlicznie 😍",
+    "Jesteś moim szczęściem 🍀",
+    "Twoje serduszko jest najcieplejsze",
+    "Jesteś ideaniołkiem 💗",
+    "Nigdy nie przestanę Cię kochać 💞",
+    "Jesteś moim promykiem dnia ☀️",
+    "Jesteś wyjątkowa",
+    "Przy Tobie czuję się najlepiej 💑",
+    "Dziękuję, że jesteś ❤️",
+    "Uwielbiam patrzeć jak się uśmiechasz 😊",
+    "Jesteś moim wszystkin ❤️",
+    "Każdy dzień z Tobą jest piękniejszy 🌷",
+	"Masz boskie ciało 🤤"
+  ];
+
+  btn.addEventListener("click", () => {
+    const los = Math.floor(Math.random() * teksty.length);
+    wynik.textContent = teksty[los];
+  });
+</script>
+
+
+<h2>Przepraszam że nie spędziłem z Tobą czasu</h2>
+<div id = "clock-rim">
+  <div id = "clock-face">
+    <div id = "notch-container"><img src="http://pngimg.com/uploads/heart/heart_PNG51324.png" style="width: 150px; height: 150px; margin: 30px;"></div>
+    <div id = "hour"></div>
+    <div id = "minute"></div>
+    <div id = "second"></div>
+    <div id = "center"></div>
+  </div>
+</div>
+<script>
+
+
+/* -- Convert degrees to radians (actually unused here :-) -- */
+function deg2rad(d) { return (2 * d / 360) * Math.PI; }
+/* -- Progress the clock's hands every once in a while -- */
+setInterval(() => {
+  let minute = document.getElementById("minute");
+  let hour = document.getElementById("hour");
+  let second = document.getElementById("second");
+  /* -- note retracing by 90 degrees, this is just the way I calculated the hands, the "0" angle is at 3PM, not 12PM, -- */
+  let S = new Date().getSeconds() * 6 - 90;
+  let M = new Date().getMinutes() * 6 - 90;
+  let H = new Date().getHours() * 30 - 90;
+  
+  second.style.transform = 'rotate(' + S + 'deg)';
+  minute.style.transform = 'rotate(' + M + 'deg)';
+  hour.style.transform = 'rotate(' + H + 'deg)';
+  
+}, 10); /* -- update the clock fast enough -- */
+/* -- Helps calculate the angle of each hand on the clock -- */
+function vec2ang(x, y) {
+ angleInRadians = Math.atan2(y, x);
+ angleInDegrees = (angleInRadians / Math.PI) * 180.0;
+ return angleInDegrees;
+}
+/* -- Let's calculate position and angle of clock's notches-- */
+let nc = document.getElementById("notch-container");
+let angle = 0;
+let rotate_x = 120;
+let rotate_y = 0;
+/* -- Calculate the 60 notches for seconds and minutes -- */
+for (let i = 0; i < 60; i++) {
+  let thin = document.createElement("div");
+  let x = rotate_x * Math.cos(angle) - rotate_y * Math.cos(angle);
+  let y = rotate_y * Math.cos(angle) + rotate_x * Math.sin(angle);
+  let r = vec2ang(x, y);
+  thin.className = "thin";
+  thin.style.left = 122 + x + "px";
+  thin.style.top = 127 + y + "px";
+  thin.style.transform = "rotate(" + r + "deg)";
+  nc.appendChild(thin);
+  angle +=  (Math.PI / 300) * 10;
+}
+// reset angle parameters
+angle = 0; rotate_x = 120; rotate_y = 0;
+/* -- Calculate the thicker notches for hour hand -- */
+for (let i = 0; i < 12; i++) {
+  let notch = document.createElement("div");
+  let x = rotate_x * Math.cos(angle) - rotate_y * Math.cos(angle);
+  let y = rotate_y * Math.cos(angle) + rotate_x * Math.sin(angle);
+  let r = vec2ang(x, y);
+  notch.className = "notch";
+  notch.style.left = 122 + x + "px";
+  notch.style.top = 127 + y + "px";
+  notch.style.transform = "rotate(" + r + "deg)";
+  nc.appendChild(notch);
+  angle +=  (Math.PI / 60) * 10;
+}
+</script>
+
+</body>
+</html>
